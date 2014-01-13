@@ -8,6 +8,7 @@
 import glob,sys,re,os,getopt,time,signal,gzip,ConfigParser
 from pprint import pprint
 
+time_unit_seconds="1/1000000"
 
 ## This function processes one logfile with regexes and stores
 ## the results in the global hash "dashboard"
@@ -115,14 +116,14 @@ def createStats():
   print "\n** creating statistics\n"
 
   # Assemble the header data
-  arr_header = [ "category name","match","count","average response time per hit (1/1000000 seconds)" ]
+  arr_header = [ "category name","match","count","average response time per hit ("+time_unit_seconds+" seconds)" ]
 
   last = 0
   for i in service_classes:
     if (i == "-1"):
-        arr_header.append("> "+ str(last) + " (1/1000000 seconds)")
+        arr_header.append("> "+ str(last) + " ("+time_unit_seconds+" seconds)")
     else:
-        arr_header.append((str(last) + "-" + str(i))+" (1/1000000 seconds)")
+        arr_header.append((str(last) + "-" + str(i))+" ("+time_unit_seconds+" seconds)")
     last = i
 
   dict_data = {}
@@ -351,6 +352,10 @@ if cfg.has_section("global") and cfg.has_option("global","http_status_code_regex
   else:
      print "error: please quote the http_status_code_regex string"
      sys.exit(1)
+
+
+if cfg.has_section("global") and cfg.has_option("global","time_unit_seconds"):
+  time_unit_seconds = cfg.get("global","time_unit_seconds")
 
 
 # request types
