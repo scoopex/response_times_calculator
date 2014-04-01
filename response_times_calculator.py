@@ -66,11 +66,14 @@ def readAccessLog(file):
       if value["negate"] == True:
       	if urlmatch :
             continue
-        ident_string = "negate"
+        ident_string = "total-negate"
       else: 
       	if not urlmatch :
             continue
-        ident_string = urlmatch.group("ident")
+        if urlmatch.groupdict().has_key("ident"): 
+            ident_string = urlmatch.group("ident")
+        else:
+            ident_string = "total-no-named-match"
 
       hashmatched += 1
 
@@ -155,6 +158,10 @@ def createStats():
   for catname,catdata in dashboard.iteritems():
     if (catdata.has_key("classes")):
         for classname,classdata in catdata["classes"].iteritems():
+            if classname == "total-no-named-match":
+              continue
+            if classname == "total-negate":
+              continue
             dict_data[catname][classname] = []
             dict_data[catname][classname].append(str(catdata["matches"][classname]))
             avg_exec = "%f" % ( catdata["exectime"][classname] / catdata["matches"][classname] )
