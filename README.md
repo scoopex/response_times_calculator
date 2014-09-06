@@ -3,6 +3,8 @@ response_times_calculator
 
 Calculate website performance statistics based on apache logfiles
 
+You love this project? Send a donation to the following bitcoin wallet: 1EGoDhAmaZbLazNmdZ9vDu2zYgFCKsNur5 
+
 # Install
 
 
