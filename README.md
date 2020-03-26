@@ -10,6 +10,7 @@ You love this project? Send a donation to the following bitcoin wallet: 1EGoDhAm
 
 Software prerequisites:
  * python
+ * cronolog (on webserver)
 
 
 # Apache configuration
