@@ -16,8 +16,13 @@ Software prerequisites:
 
 Define the following logformattter and use it in the virtual host
 ```
+# Central configuration or pr VHOST
 LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D" combined_performance
+
+# Simple
 CustomLog "logs/access_log" combined_performance
+# Better
+CustomLog "|/usr/bin/cronolog -l /var/log/apache2/vhosts/my.domain.org/current-ssl_access_log /var/log/apache2/vhosts/my.domain.org/ssl_access_log.%Y-%m-%d" combined_performance
 ```
 
 
